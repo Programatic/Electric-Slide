@@ -52,3 +52,25 @@ def setStripColor(strip, color):
 if __name__ == '__main__':
     thread1 = Thread( target=update )
     thread1.start()
+
+    strip = PixelStrip(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
+    strip.begin()
+
+    while True:
+        setStripColor(strip, color)
+
+        t1 = time.time()
+        i = 0.
+        while i <= 38:
+            strip.setBrightness(int(i))
+            strip.show()
+            i += mult
+
+        i = 38
+        while i > 0:
+            strip.setBrightness(int(i))
+            strip.show()
+            i -= mult
+
+
+        time.sleep(max(t*2 - (time.time() - t1), 0))
